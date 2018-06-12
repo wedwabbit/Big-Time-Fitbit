@@ -1,0 +1,19 @@
+{
+  "fitbit": {
+    "appUUID": "67ccd6c0-dca2-4576-8d7c-73834cb7611c",
+    "appType": "clockface",
+    "appDisplayName": "Big Time",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "",
+    "requestedPermissions": [],
+    "buildTargets": [
+      "meson",
+      "higgs"
+    ],
+    "i18n": {
+      "en": {
+        "name": "Big Time"
+      }
+    }
+  }
+}
