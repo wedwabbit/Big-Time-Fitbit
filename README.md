@@ -4,7 +4,7 @@ Clock face for Fitbit Versa and Ionic that makes use of large fonts. Port of a s
 Features include:
 1. Choice of fonts (only two at the moment).
 2. Choice of background and foreground (digit) colours.
-3. Tap display date (date on top line, month on bottom line).
+3. Tap to display date (date on top line, month on bottom line).
 4. Choice of timeout for date display (1, 2, or 5 seconds).
 
 To do:
