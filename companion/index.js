@@ -5,6 +5,7 @@ import { me } from "companion";
 let KEY_FCOLOR = "myForeground";
 let KEY_BCOLOR = "myBackground";
 let KEY_FONT = "myFont";
+let KEY_TIMEOUT = "myTimeout";
 
 // Settings have been changed
 settingsStorage.onchange = function(evt) {
@@ -17,6 +18,7 @@ if (me.launchReasons.settingsChanged) {
   sendValue(KEY_FCOLOR, settingsStorage.getItem(KEY_FCOLOR));
   sendValue(KEY_BCOLOR, settingsStorage.getItem(KEY_BCOLOR));
   sendValue(KEY_FONT, settingsStorage.getItem(KEY_FONT));
+  sendValue(KEY_TIMEOUT, settingsStorage.getItem(KEY_TIMEOUT));
 }
 
 function sendValue(key, val) {

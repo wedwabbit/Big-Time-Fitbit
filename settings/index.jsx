@@ -13,6 +13,18 @@ function Colours(props) {
         />  
       </Section>
       <Section
+        title={<Text bold align="center">Date Display Timeout</Text>}>
+        <Select
+          settingsKey="myTimeout"
+          label="Timeout"
+          options={[
+            {name: "1 second", value:"1"},
+            {name: "2 seconds", value:"2"},
+            {name: "5 seconds", value:"5"}
+          ]}
+        />  
+      </Section>
+      <Section
         title={<Text bold align="center">Foreground Colour</Text>}>
         <ColorSelect
           settingsKey="myForeground"

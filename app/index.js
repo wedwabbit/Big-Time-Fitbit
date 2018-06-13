@@ -18,6 +18,7 @@ let settings = loadSettings();
 const KEY_FCOLOR = "myForeground";
 const KEY_BCOLOR = "myBackground";
 const KEY_FONT = "myFont";
+const KEY_TIMEOUT = "myTimeout";
 
 // Set default settings if new install.
 if(settings[KEY_FCOLOR] == undefined) {
@@ -28,6 +29,9 @@ if(settings[KEY_BCOLOR] == undefined) {
 }
 if(settings[KEY_FONT] == undefined) {
   settings[KEY_FONT] = {"selected":[0],"values":[{"name":"SquareFace","value":"2"}]};
+}
+if(settings[KEY_FONT] == undefined) {
+  settings[KEY_FONT] = {"selected":[0],"values":[{"name":"1 second","value":"1"}]};
 }
 
 // Update all element colours on launch.
@@ -40,6 +44,24 @@ items.forEach(function(item) {
   item.style.fill = settings[KEY_BCOLOR];
 });
 
+// Setup screen element function to display date on click.
+let hours1 = document.getElementById("hours1");
+hours1.onclick = function(e) {
+  displayDate();
+}
+let hours2 = document.getElementById("hours2");
+hours2.onclick = function(e) {
+  displayDate();
+}
+let mins1 = document.getElementById("mins1");
+mins1.onclick = function(e) {
+  displayDate();
+}
+let mins2 = document.getElementById("mins2");
+mins2.onclick = function(e) {
+  displayDate();
+}
+
 // Update display every minute.
 clock.granularity = "minutes";
 
@@ -49,8 +71,7 @@ clock.ontick = evt => {
 }
 
 // Update display.
-function displayUpdate(evt) {
-  
+function displayUpdate(evt) {  
   // Check if either evt or evt.date is undefined (eg: when font is changed).
   if(evt == undefined || evt.date == undefined) {
     // Get the current time.
@@ -76,10 +97,25 @@ function displayUpdate(evt) {
   setMins(minute);
 }
 
-function setHours(val) {
-  let hours1 = document.getElementById("hours1");
-  let hours2 = document.getElementById("hours2");
+// Update display with the date.
+function displayDate() { 
+  let d = new Date();
+
+  // Day
+  let day = d.getDate();
+
+  // Month
+  let month = d.getMonth();
   
+  // Displayt the date. Hours section used for day and Minutes section for month.
+  setHours(day);
+  setMins(month);
+  
+  // Wait timeout seconds and then re-display the time.
+  setTimeout(displayUpdate, settings[KEY_TIMEOUT].values[0].value * 1000);
+}
+
+function setHours(val) {
   if (val > 9) {
     drawDigit(Math.floor(val / 10), hours1);
   } else {
@@ -89,15 +125,13 @@ function setHours(val) {
 }
 
 function setMins(val) {
-  let mins1 = document.getElementById("mins1");
-  let mins2 = document.getElementById("mins2");
-  
   drawDigit(Math.floor(val / 10), mins1);
   drawDigit(Math.floor(val % 10), mins2);
 }
 
 function drawDigit(val, place) {
   if(val == "X") {
+    // No digit in this place so use empty.
     place.image = "font" + settings[KEY_FONT].values[0].value + "_empty.png";
     
   } else {
